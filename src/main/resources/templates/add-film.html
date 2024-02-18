@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add film</title>
+</head>
+<body>
+<header th:insert="fragments/header :: header"/>
+<h1>Добавяне на филм</h1>
+<div th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<form action="/films/add" method="post">
+    <label for="title"> Заглавие:</label>
+    <input type="text" id="title" name="title">
+
+    <label for="genre"> Жанр:</label>
+    <select name="genre" id="genre">
+        <option value="ACTION">Екшън</option>
+        <option value="COMEDY">Комедия</option>
+        <option value="DRAMA">Драма</option>
+    </select>
+    <label for="year">Година на издаване:</label>
+    <input type="number" id="year" name="year">
+
+    <label for="actors">Актьори:</label>
+    <select multiple name="actors" id="actors">
+        <option value="">Избери...</option>
+        <option th:each="actor : ${actors}" th:value="${actor.id}" th:text="${actor.first_name}" ></option>
+
+    </select>
+    <br>
+
+    <button type="submit">Добави филм</button>
+</form>
+<footer th:insert="fragments/footer :: footer">
+
+</body>
+</html>

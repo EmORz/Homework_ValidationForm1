@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add nationality</title>
+</head>
+<body>
+<header th:insert="fragments/header :: header"/>
+<h1>Добавяне на националност</h1>
+<form action="/nationalities/add" method="post">
+  <label for="name">Име:</label>
+  <input type="text" name="name" id="name">
+  <br>
+  <label for="population">Население:</label>
+  <input type="number" name="population" id="population">
+  <br>
+  <br>
+  <button type="submit">Добави</button>
+</form>
+<footer th:insert="fragments/footer :: footer">
+</body>
+</html>

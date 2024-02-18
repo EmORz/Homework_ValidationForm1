@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actors</title>
+</head>
+<body>
+<header th:insert="fragments/header :: header"/>
+<h1>Актьори</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Име</th>
+    <th>Фамилия</th>
+    <th>Пол</th>
+    <th>Възраст</th>
+    <th>Националност</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="actor : ${actors}">
+    <td th:text="${actor.first_name}"></td>
+    <td th:text="${actor.last_name}"></td>
+    <td th:text="${actor.gender}"></td>
+    <td th:text="${actor.age}"></td>
+    <td th:text="${actor.nationality.name}"></td>
+  </tr>
+  </tbody>
+</table>
+<footer th:insert="fragments/footer :: footer">
+
+</body>
+</html>

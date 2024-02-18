@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Films</title>
+</head>
+<body>
+<header th:insert="fragments/header :: header"/>
+<h1>Films</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Genre</th>
+    <th>Year</th>
+    <th>Actors</th>
+  </tr>
+  </thead>
+  <tbody id="movies-table">
+  <tr th:each="film : ${films}">
+      <td th:text="${film.title}"></td>
+      <td th:text="${film.genre}"></td>
+      <td th:text="${film.year}"></td>
+<!--      <td th:text="${#strings.join(film.actors, ', ')}"></td>-->
+      <td>
+          <ul>
+              <li th:each="actor : ${film.actors}">
+                  <span th:text="|${actor.first_name} ${actor.last_name}|"></span>
+              </li>
+          </ul>
+      </td>
+  </tr>
+  </tbody>
+</table>
+<footer th:insert="fragments/footer :: footer">
+
+</body>
+</html>

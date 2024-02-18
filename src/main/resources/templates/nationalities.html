@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nationalities</title>
+</head>
+<body>
+<header th:insert="fragments/header :: header"/>
+<h1>Националности</h1>
+<table border="1">
+  <thead>
+  <tr>
+    <th>Име</th>
+    <th>Население</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="nationality : ${nationalities}">
+    <td th:text="${nationality.name}"></td>
+    <td th:text="${nationality.population}"></td>
+  </tr>
+  </tbody>
+</table>
+<footer th:insert="fragments/footer :: footer">
+
+</body>
+</html>
