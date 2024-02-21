@@ -1,10 +1,12 @@
 package com.example.Homework_ValidationForm1;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ActorController {
@@ -26,10 +28,17 @@ public class ActorController {
     }
 
     @PostMapping("/actors/add")
-    public String addActor(@ModelAttribute Actor actor) {
-        actorRepository.save(actor);
+    public String addActor(@ModelAttribute @Valid Actor actor, Model model, RedirectAttributes redirectAttributes) {
 
-        return "redirect:/actors";
+
+        try {
+            actorRepository.save(actor);
+            redirectAttributes.addFlashAttribute("message", "Нов актьор е добавен успешно!");
+            return "redirect:/actors";
+        } catch (Exception e) {
+            model.addAttribute("error", new Error(e.getMessage(), e.getCause()));
+            return "index";
+        }
     }
 
     @GetMapping("/actors")

@@ -7,6 +7,11 @@
 <body>
 <header th:insert="fragments/header :: header"/>
 <h1>Националности</h1>
+<th:block th:if="${message}">
+  <div th:class="${#strings.startsWith(message, 'Успех:') ? 'success' : 'error'}">
+    <h1 th:text="${message}"></h1>
+  </div>
+</th:block>
 <table border="1">
   <thead>
   <tr>

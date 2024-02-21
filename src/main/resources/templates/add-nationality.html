@@ -6,13 +6,31 @@
 </head>
 <body>
 <header th:insert="fragments/header :: header"/>
+
+
 <h1>Добавяне на националност</h1>
-<form action="/nationalities/add" method="post">
+<form th:action="@{/nationalities/add}" th:object="${nationality}" method="post">
   <label for="name">Име:</label>
-  <input type="text" name="name" id="name">
+  <input type="text" name="name" id="name" th:field="*{name}">
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
+    <ul>
+        <li th:each="error : ${fieldErrors}">
+            <span th:text="${error.defaultMessage}"></span>
+        </li>
+    </ul>
+</span>
+
+
   <br>
   <label for="population">Население:</label>
-  <input type="number" name="population" id="population">
+  <input type="number" name="population" id="population" th:field="*{population}">
+    <span th:if="${#fields.hasErrors('population')}" th:errors="*{population}">
+    <ul>
+        <li th:each="error : ${fieldErrors}">
+            <span th:text="${error.defaultMessage}"></span>
+        </li>
+    </ul>
+</span>
   <br>
   <br>
   <button type="submit">Добави</button>

@@ -1,6 +1,9 @@
 package com.example.Homework_ValidationForm1;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
@@ -11,7 +14,11 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    @Size(min = 2, max = 50)
     private String first_name;
+    @NotNull
+    @Size(min = 2, max = 50)
     private String last_name;
 
     @ManyToOne
@@ -20,8 +27,10 @@ public class Actor {
     @ManyToMany
     private Set<Film> films;
 
+    @Min(1)
     private Integer age;
 
+    @NotNull
     private Gender gender;
 
     public Gender getGender() {
