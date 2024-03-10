@@ -1,6 +1,7 @@
 package com.example.Homework_ValidationForm1;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ public class NationalityController {
         this.nationalityRepository = nationalityRepository;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/nationalities/add")
     public String showAddNationalityForm(Model model) {
         model.addAttribute("nationality", new Nationality());
@@ -47,6 +49,7 @@ public class NationalityController {
 
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/nationalities")
     public String showNationalities(Model model) {
         Iterable<Nationality> nationalities = nationalityRepository.findAll();

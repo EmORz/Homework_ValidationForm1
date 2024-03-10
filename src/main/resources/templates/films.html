@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Films</title>
@@ -7,6 +7,11 @@
 <body>
 <header th:insert="fragments/header :: header"/>
 <h1>Films</h1>
+<div sec:authorize="hasRole('USER')">Text visible to user.</div>
+<div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
+<div sec:authorize="isAuthenticated()">Text visible only to authenticated users.</div>
+Authenticated username:
+<div sec:authentication="name"></div>
 <table border="1">
   <thead>
   <tr>

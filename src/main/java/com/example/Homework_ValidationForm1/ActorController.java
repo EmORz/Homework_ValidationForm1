@@ -1,6 +1,7 @@
 package com.example.Homework_ValidationForm1;
 
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ public class ActorController {
         this.nationalityRepository = nationalityRepository;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/actors/add")
     public String showAddActorForm(Model model) {
         Iterable<Nationality> nationalities = nationalityRepository.findAll();
@@ -41,6 +43,7 @@ public class ActorController {
         }
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/actors")
     public String showActors(Model model) {
         Iterable<Actor> actors = actorRepository.findAll();

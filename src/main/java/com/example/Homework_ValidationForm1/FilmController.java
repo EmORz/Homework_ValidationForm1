@@ -2,6 +2,7 @@ package com.example.Homework_ValidationForm1;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ public class FilmController {
         this.actorRepository = actorRepository;
     }
 
+    @PreAuthorize("hasRole('USER')")
     @GetMapping("/films/add")
     public String showAddFilmForm(Model model){
         Iterable<Actor> actors = actorRepository.findAll();
@@ -30,6 +32,8 @@ public class FilmController {
         model.addAttribute("actors", actors);
         return "add-film";
     }
+
+
 
     @PostMapping("/films/add")
     public String addFilm(@ModelAttribute Film film,
