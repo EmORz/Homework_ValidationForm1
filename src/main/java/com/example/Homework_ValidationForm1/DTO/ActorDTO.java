@@ -1,18 +1,18 @@
-package com.example.Homework_ValidationForm1;
+package com.example.Homework_ValidationForm1.DTO;
 
-import jakarta.persistence.*;
+import com.example.Homework_ValidationForm1.Actor;
+import com.example.Homework_ValidationForm1.Film;
+import com.example.Homework_ValidationForm1.Gender;
+import com.example.Homework_ValidationForm1.Nationality;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.Set;
 
-@Entity
-public class Actor {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ActorDTO {
 
     @NotNull
     @Size(min = 2, max = 50)
@@ -33,44 +33,6 @@ public class Actor {
     @NotNull
     private Gender gender;
 
-    // Телефонен номер (не се попълва от формата)
-    private String phoneNumber;
-
-    // Електронна поща (не се попълва от формата)
-    private String email;
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Gender getGender() {
-        return gender;
-    }
-
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getFirst_name() {
         return first_name;
     }
@@ -87,14 +49,6 @@ public class Actor {
         this.last_name = last_name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
     public Nationality getNationality() {
         return nationality;
     }
@@ -109,5 +63,29 @@ public class Actor {
 
     public void setFilms(Set<Film> films) {
         this.films = films;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public ActorDTO toActorDTO(Actor actor) {
+        ActorDTO actorDTO = new ActorDTO();
+        actorDTO.setFirst_name(actor.getFirst_name());
+        actorDTO.setLast_name(actor.getLast_name());
+        // ... задайте другите полета по подобен начин ...
+        return actorDTO;
     }
 }
